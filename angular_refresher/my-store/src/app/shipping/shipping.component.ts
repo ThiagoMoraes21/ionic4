@@ -20,5 +20,4 @@ export class ShippingComponent implements OnInit {
     this.shippingCost = this.cartService.getShippingPrices();
     return this.shippingCost;
   }
-
 }
