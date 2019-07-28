@@ -19,6 +19,7 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.getItems();
     this.setupCheckoutForm();
+
   }
 
   getItems() {
@@ -34,11 +35,18 @@ export class CartComponent implements OnInit {
   }
 
   onSubmit(value) {
-    console.log('User input: ', value);
-    console.log('Selected products: ', this.items);
+    if(value.name !== '' && value.address !== '' && this.items.length > 0) {
+      this.items = this.cartService.clearCart();
+      this.checkoutForm.reset();
+    }else if(this.items.length == 0) {
+      window.alert('Your cart is empty, please choose some product!');
+    } else {
+      window.alert('Please enter your name and address!');
+    }
+  }
 
-    this.items = this.cartService.clearCart();
-    this.checkoutForm.reset();
+  onRemove(itemIndex) {
+    this.cartService.removeItem(itemIndex);
   }
 
 }
